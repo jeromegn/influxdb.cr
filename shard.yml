@@ -1,0 +1,15 @@
+name: influxdb
+version: 0.1.0
+
+authors:
+  - Jerome Gravel-Niquet <jeromegn@gmail.com>
+
+license: MIT
+
+development_dependencies:
+  webmock:
+    github: manastech/webmock.cr
+    branch: master
+  spec2:
+    github: waterlink/spec2.cr
+    version: ~> 0.7.1

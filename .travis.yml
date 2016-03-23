@@ -1,0 +1,8 @@
+language: crystal
+env:
+  - INFLUXDB_VERSION=0.10.3
+before_install:
+  - wget https://s3.amazonaws.com/influxdb/influxdb_${INFLUXDB_VERSION}_amd64.deb
+  - sudo dpkg -i influxdb_${INFLUXDB_VERSION}_amd64.deb
+  - sudo /etc/init.d/influxdb start
+  - sleep 5
