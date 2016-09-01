@@ -2,7 +2,7 @@ module InfluxDB
   struct Databases
 
     include Enumerable(Database)
-    delegate :query, @client
+    delegate :query, to: @client
 
     def initialize(@client : Client)
     end
