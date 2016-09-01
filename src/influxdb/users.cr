@@ -2,7 +2,7 @@ module InfluxDB
   struct Users
 
     include Enumerable(User)
-    delegate :query, @client
+    delegate :query, to: @client
 
     getter db : String
 

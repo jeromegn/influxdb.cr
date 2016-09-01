@@ -1,7 +1,7 @@
 module InfluxDB
   struct Database
     getter :name
-    delegate :query, @client
+    delegate :query, to: @client
 
     # @@processed = Channel(HTTP::Client::Response)
     # spawn do
@@ -10,7 +10,7 @@ module InfluxDB
     #   end
     # end
 
-    def initialize(@client : Client, @name)
+    def initialize(@client : Client, @name : String)
     end
 
     def drop
@@ -57,7 +57,7 @@ module InfluxDB
     end
 
     def write(series : String, value : Value, tags = Tags.new, timestamp : Time? = nil, sync = false)
-      write series, Fields{value: value}, tags: tags, timestamp: timestamp, sync: sync
+      write series, Fields{:value => value}, tags: tags, timestamp: timestamp, sync: sync
     end
 
     def write(sync = false)

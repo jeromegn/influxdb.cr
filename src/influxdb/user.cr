@@ -1,7 +1,7 @@
 module InfluxDB
   struct User
     getter name : String
-    delegate :query, @client
+    delegate :query, to: @client
 
     def initialize(@client : Client, @name)
     end

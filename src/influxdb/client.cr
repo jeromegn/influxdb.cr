@@ -11,6 +11,8 @@ module InfluxDB
 
     forward_missing_to client
 
+    @client : HTTP::Client?
+    
     def initialize(url = DEFAULT_URL, @username = DEFAULT_USERNAME, @password = DEFAULT_PASSWORD)
       @url = URI.parse(url)
     end
@@ -28,6 +30,7 @@ module InfluxDB
         c.basic_auth(@username, @password) if !@username.empty? && !@password.empty?
         c
       end
+      @client.not_nil!
     end
 
     def query(q, db = "")

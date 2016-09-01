@@ -33,7 +33,7 @@ Write one data point with a value:
 
 ```crystal
 db.write "your_series", 10 # => true
-db.write "your_series", InfluxDB::Fields{a_field: 100, value: 10000}
+db.write "your_series", InfluxDB::Fields{:a_field => 100, :value => 10000}
 ```
 
 Write many data points:
@@ -42,15 +42,15 @@ Write many data points:
 db.write do |points|
   points.write "your_series", 10
   points.write "another_series", 100
-  points.write "another_series", 1000, InfluxDB::Tags{a_tag: "hello"}
+  points.write "another_series", 1000, InfluxDB::Tags{:a_tag => "hello"}
 end # => true
 ```
 
 Write points with fields, tags and a timestamp:
 
 ```crystal
-db.write "your_series", InfluxDB::Fields{a_field: 100, value: 10000},
-  tags: InfluxDB::Tags{region: "us"}, timestamp: Time.now
+db.write "your_series", InfluxDB::Fields{:a_field => 100, :value => 10000},
+  tags: InfluxDB::Tags{:region => "us"}, timestamp: Time.now
 ```
 
 Write a point synchronously

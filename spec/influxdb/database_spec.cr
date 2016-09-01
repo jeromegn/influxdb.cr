@@ -26,12 +26,12 @@ describe InfluxDB::Database do
   describe "#write" do
 
     it "with PointValue" do
-      pv = InfluxDB::PointValue.new("some_series", InfluxDB::Fields{value: 10})
+      pv = InfluxDB::PointValue.new("some_series", InfluxDB::Fields{:value => 10})
       db.write(pv).should eq(true)
     end
 
     it "with PointValue-like attributes" do
-      db.write("some_series", InfluxDB::Fields{value: 10}).should eq(true)
+      db.write("some_series", InfluxDB::Fields{:value => 10}).should eq(true)
     end
 
     it "with only a value" do
@@ -40,14 +40,14 @@ describe InfluxDB::Database do
 
     it "with many values" do
       db.write do |points|
-        points.write "many_series", InfluxDB::Fields{value: 1}, tags: {from_block: "yes"}
-        points.write "many_series", InfluxDB::Fields{value: 11}, tags: {from_block: "yes", second: "ah"}
-        points.write "many_series", InfluxDB::Fields{value: 111}, tags: {from_block: "yes", third: "oh"}
+        points.write "many_series", InfluxDB::Fields{:value => 1}, tags: {:from_block => "yes"}
+        points.write "many_series", InfluxDB::Fields{:value => 11}, tags: {:from_block => "yes", :second => "ah"}
+        points.write "many_series", InfluxDB::Fields{:value => 111}, tags: {:from_block => "yes", :third => "oh"}
       end.should eq(true)
     end
 
     it "synchronized" do
-      db.write("some_series", InfluxDB::Fields{value: 10}, sync: true).should eq(true)
+      db.write("some_series", InfluxDB::Fields{:value => 10}, sync: true).should eq(true)
     end
 
   end

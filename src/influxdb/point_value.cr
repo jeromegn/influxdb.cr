@@ -5,11 +5,10 @@ module InfluxDB
 
     def initialize(
       @series : String,
-      @fields = Fields.new,
-      @tags = Tags.new,
+      @fields : Fields = Fields.new,
+      @tags : Tags = Tags.new,
       @timestamp : Time? = nil
     )
-
     end
 
     def to_s(io)

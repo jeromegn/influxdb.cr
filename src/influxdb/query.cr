@@ -7,7 +7,7 @@ module InfluxDB
     property! fields : String
     property! measurement : String
 
-    def initialize(@client, @db : String)
+    def initialize(@client : Client, @db : String)
       @results = [] of Result
     end
 
