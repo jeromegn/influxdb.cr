@@ -11,7 +11,6 @@ module InfluxDB
     # end
 
     def initialize(@client : Client, @name : String)
-      @channel = Channel(String).new
     end
 
     # https://docs.influxdata.com/influxdb/latest/query_language/database_management/#delete-a-database-with-drop-database
