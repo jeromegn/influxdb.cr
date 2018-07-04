@@ -39,7 +39,7 @@ module InfluxDB
     end
 
     private def send_write(body)
-      @client.post "/write?db=#{name}",
+      @client.post "/write?db=#{name}&precision=ms",
         HTTP::Headers{
           "Content-Type" => "application/octet-stream",
         },
