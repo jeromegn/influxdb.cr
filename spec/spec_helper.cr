@@ -1,8 +1,5 @@
-require "webmock"
 require "../src/influxdb"
 require "spec"
-
-WebMock.allow_net_connect = true
 
 Spec.before_each do
   db.drop
@@ -11,15 +8,31 @@ end
 
 class Runtime
   @dbs : InfluxDB::Databases?
-  @db  : InfluxDB::Database?
+  @db : InfluxDB::Database?
 
-  def client; @client ||= InfluxDB::Client.new; end
-  def dbs; (@dbs ||= client.databases).not_nil!; end
-  def db; (@db ||= dbs["test"]).not_nil!; end
+  def client
+    @client ||= InfluxDB::Client.new
+  end
+
+  def dbs
+    (@dbs ||= client.databases).not_nil!
+  end
+
+  def db
+    (@db ||= dbs["test"]).not_nil!
+  end
 
   INSTANCE = new
 end
 
-def client; Runtime::INSTANCE.client; end
-def dbs; Runtime::INSTANCE.dbs; end
-def db; Runtime::INSTANCE.db; end
+def client
+  Runtime::INSTANCE.client
+end
+
+def dbs
+  Runtime::INSTANCE.dbs
+end
+
+def db
+  Runtime::INSTANCE.db
+end

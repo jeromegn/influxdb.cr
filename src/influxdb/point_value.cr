@@ -1,6 +1,5 @@
 module InfluxDB
   struct PointValue
-
     getter :series, :tags, :fields, :timestamp
 
     def initialize(
@@ -40,7 +39,7 @@ module InfluxDB
     end
 
     private def map(h, quote_escape)
-      h.map do |k,v|
+      h.map do |k, v|
         key = escape_key(k)
         val = v.is_a?(String) ? escape_value(v, quote_escape) : v
         "#{key}=#{val}"
@@ -52,13 +51,12 @@ module InfluxDB
     end
 
     private def escape_value(value, quote_escape)
-      val = value.
-        gsub(/\s/, "\ ").
-        gsub(",", "\,").
-        gsub("\"", "\\\"")
+      val = value
+        .gsub(/\s/, "\ ")
+        .gsub(",", "\,")
+        .gsub("\"", "\\\"")
       val = %("#{val}") if quote_escape
       val
     end
-
   end
 end

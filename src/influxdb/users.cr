@@ -1,6 +1,5 @@
 module InfluxDB
   struct Users
-
     include Enumerable(User)
     delegate :query, to: @client
 
@@ -33,6 +32,5 @@ module InfluxDB
     def each
       all.each { |db| yield db }
     end
-
   end
 end

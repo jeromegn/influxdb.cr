@@ -17,4 +17,3 @@ blah = influx.databases["blah"]
 blah.select.from("many_series").each do |res|
   p res
 end
-

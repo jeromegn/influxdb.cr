@@ -5,14 +5,14 @@ module InfluxDB
     include Databases
     include Users
 
-    DEFAULT_URL = "http://localhost:8086"
+    DEFAULT_URL      = "http://localhost:8086"
     DEFAULT_USERNAME = "root"
     DEFAULT_PASSWORD = "root"
 
     forward_missing_to client
 
     @client : HTTP::Client?
-    
+
     def initialize(url = DEFAULT_URL, @username = DEFAULT_USERNAME, @password = DEFAULT_PASSWORD)
       @url = URI.parse(url)
     end
@@ -20,6 +20,7 @@ module InfluxDB
     def host
       @url.host
     end
+
     def port
       @url.port
     end
@@ -46,6 +47,5 @@ module InfluxDB
         raise Exception.new("InfluxDB error: #{err_msg}")
       end
     end
-
   end
 end
