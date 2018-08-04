@@ -11,6 +11,7 @@ module InfluxDB
     # end
 
     def initialize(@client : Client, @name : String)
+      @mutex = Mutex.new
     end
 
     # https://docs.influxdata.com/influxdb/latest/query_language/database_management/#delete-a-database-with-drop-database
@@ -39,11 +40,13 @@ module InfluxDB
     end
 
     private def send_write(body)
-      @client.post "/write?db=#{name}&precision=ms",
-        HTTP::Headers{
-          "Content-Type" => "application/octet-stream",
-        },
-        body
+      @mutex.synchronize do
+        @client.post "/write?db=#{name}&precision=ms",
+          HTTP::Headers{
+            "Content-Type" => "application/octet-stream",
+          },
+          body
+      end
     end
 
     def write(series : String, fields : Fields, tags = Tags.new, timestamp : Time? = nil)
