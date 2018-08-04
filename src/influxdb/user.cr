@@ -29,6 +29,5 @@ module InfluxDB
       query "DROP USER #{name}"
       true
     end
-
   end
 end

@@ -53,10 +53,10 @@ db.write "your_series", InfluxDB::Fields{:a_field => 100, :value => 10000},
   tags: InfluxDB::Tags{:region => "us"}, timestamp: Time.now
 ```
 
-Write a point synchronously
+Write a point asynchronously
 
 ```crystal
-db.write "your_series", 10, sync: true # => true or false depending on the response
+spawn { db.write "your_series", 10 }
 ```
 
 ## Contributing

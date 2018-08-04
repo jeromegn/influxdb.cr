@@ -52,6 +52,5 @@ module InfluxDB
         end
       end
     end
-
   end
 end

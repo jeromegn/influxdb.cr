@@ -1,7 +1,6 @@
 module InfluxDB
   class Query
     struct Result
-
       getter name : String
       getter tags : Tags
       getter fields : Fields
@@ -16,7 +15,6 @@ module InfluxDB
       def value
         @fields["value"]
       end
-
     end
   end
 end
