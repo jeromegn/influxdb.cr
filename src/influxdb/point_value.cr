@@ -30,7 +30,7 @@ module InfluxDB
     end
 
     private def parse_timestamp
-      @timestamp.not_nil!.epoch_ms
+      @timestamp.not_nil!.to_unix_ms
     end
 
     private def parse_hash(h, quote_escape = false)
