@@ -41,9 +41,21 @@ module InfluxDB
     private def map(h, quote_escape)
       h.map do |k, v|
         key = escape_key(k)
-        val = v.is_a?(String) ? escape_value(v, quote_escape) : v
+        val = v.is_a?(String) ? escape_value(v, quote_escape) : escape_non_string(v)
         "#{key}=#{val}"
       end
+    end
+
+    # when passing an integer to influxdb, we must suffix it with "i", or else
+    # it will assume v is a float. type misalignment in a series is something
+    # influxdb does not allow, and we get an error
+    private def escape_non_string(v : Int)
+      "#{v}i"
+    end
+
+    # when v is a float or etc, the "i" suffix is not required
+    private def escape_non_string(v)
+      v
     end
 
     private def escape_key(key)
