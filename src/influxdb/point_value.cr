@@ -41,7 +41,7 @@ module InfluxDB
     private def map(h, quote_escape)
       h.map do |k, v|
         key = escape_key(k)
-        val = escape_value(v, quote_escape)
+        val = format_value(v, quote_escape)
         "#{key}=#{val}"
       end
     end
@@ -50,7 +50,7 @@ module InfluxDB
       key.to_s.gsub(/\s/, "\ ").gsub(",", "\,")
     end
 
-    private def escape_value(value, quote_escape)
+    private def format_value(value, quote_escape)
       case value
       when String
         escape_string(value, quote_escape)
