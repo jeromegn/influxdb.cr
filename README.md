@@ -50,7 +50,7 @@ Write points with fields, tags and a timestamp:
 
 ```crystal
 db.write "your_series", InfluxDB::Fields{:a_field => 100, :value => 10000},
-  tags: InfluxDB::Tags{:region => "us"}, timestamp: Time.now
+  tags: InfluxDB::Tags{:region => "us"}, timestamp: Time.utc
 ```
 
 Write a point asynchronously
