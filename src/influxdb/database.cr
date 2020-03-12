@@ -50,7 +50,7 @@ module InfluxDB
     end
 
     def write(series : String, fields : Fields, tags = Tags.new, timestamp : Time? = nil)
-      timestamp = Time.now if timestamp.nil?
+      timestamp = Time.utc if timestamp.nil?
       write PointValue.new(series, tags: tags, fields: fields, timestamp: timestamp)
     end
 
